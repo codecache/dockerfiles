@@ -1,11 +1,10 @@
 FROM hashicorp/terraform:0.14.6
 
-RUN apk --no-cache add curl openssh-client bash
+RUN apk --no-cache add curl openssh-client bash python3 py3-pip
 
 # install awscli
-RUN curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN unzip -qq awscliv2.zip
-RUN ./aws/install
+RUN pip3 install --upgrade pip
+RUN pip3 install awscli
 
 # install kubectl
 RUN curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -18,3 +17,6 @@ RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # configure bash as the default shell
 RUN ln -sf bash /bin/sh
+
+# optimize image
+RUN apk del curl py3-pip
