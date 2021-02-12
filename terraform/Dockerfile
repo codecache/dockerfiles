@@ -17,6 +17,3 @@ RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # configure bash as the default shell
 RUN ln -sf bash /bin/ash
-
-# optimize image
-RUN apk -q del curl py3-pip
