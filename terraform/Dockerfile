@@ -14,6 +14,8 @@ RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 RUN mkdir -p ~/.ssh
 RUN chmod 700 ~/.ssh
 RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+RUN touch ~/.ssh/id_rsa
+RUN chmod 600 ~/.ssh/id_rsa
 
 # configure bash as the default shell
 RUN ln -sf bash /bin/ash
