@@ -4,7 +4,7 @@ FROM hashicorp/terraform:0.14.6
 RUN apk update
 
 # install awscli
-RUN apk add python3
+RUN apk add python3 py3-pip
 RUN pip3 install --upgrade pip
 RUN pip3 install awscli
 
@@ -16,3 +16,9 @@ RUN sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 # install ssh-agent
 RUN apk add openssh-client
+RUN mkdir -p ~/.ssh
+RUN chmod 700 ~/.ssh
+RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+# image size optimization
+RUN rm -rf /var/cache/apk/*
