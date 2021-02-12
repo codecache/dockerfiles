@@ -9,6 +9,7 @@ RUN pip3 install --upgrade pip
 RUN pip3 install awscli
 
 # install kubectl
+RUN apk app curl
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
 RUN echo "$(<kubectl.sha256) kubectl" | sha256sum --check
